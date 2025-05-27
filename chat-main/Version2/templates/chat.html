@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат с помощником магазина</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #chat-container {
+            height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .user-message {
+            background-color: #e6f3ff;
+            text-align: right;
+        }
+        .bot-message {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-2xl bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold mb-4 text-center">Чат с помощником магазина</h1>
+        <div id="chat-container" class="bg-gray-50 rounded-lg"></div>
+        <form id="chat-form" class="flex gap-2">
+            <input type="text" id="message-input" class="flex-1 border rounded-lg p-2" placeholder="Введите ваш вопрос..." required>
+            <button type="submit" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">Отправить</button>
+        </form>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const chatForm = document.getElementById('chat-form');
+        const messageInput = document.getElementById('message-input');
+
+        // Функция для добавления сообщения в чат
+        function addMessage(content, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = content;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight; // Прокрутка вниз
+        }
+
+        // Обработка отправки формы
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Добавление сообщения пользователя
+            addMessage(message, true);
+            messageInput.value = '';
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `message=${encodeURIComponent(message)}`
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    addMessage(data.response, false);
+                } else {
+                    addMessage(`Ошибка: ${data.error}`, false);
+                }
+            } catch (error) {
+                addMessage(`Ошибка: ${error.message}`, false);
+            }
+        });
+    </script>
+</body>
+</html>

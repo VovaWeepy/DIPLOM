@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Добро пожаловать в интернет-магазин!</h1>
+    <div>
+        <h2>Категории:</h2>
+        <button onclick="window.location.href='/category/Смартфоны'">Смартфоны</button>
+        <button onclick="window.location.href='/category/Ноутбуки'">Ноутбуки</button>
+        <button onclick="window.location.href='/category/Телевизоры'">Телевизоры</button>
+        <button onclick="window.location.href='/category/Наушники'">Наушники</button>
+        <button onclick="window.location.href='/category/Планшеты'">Планшеты</button>
+    </div>
+<!--    <div id="productList">-->
+<!--        <h2>Все товары:</h2>-->
+<!--        {% if products %}-->
+<!--            <ul>-->
+<!--                {% for product in products %}-->
+<!--                    <li>{{ product.name }} - {{ product.category }} - {{ product.price }} руб.</li>-->
+<!--                {% endfor %}-->
+<!--            </ul>-->
+<!--        {% else %}-->
+<!--            <p>Товары не найдены.</p>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+
+    <!-- Иконка чата -->
+    <div id="chatIcon">
+        <img src="/static/chat-icon.png" alt="Чат с ассистентом" title="Открыть чат">
+    </div>
+
+    <!-- Окно чата -->
+    <div id="chatWindow" style="display: none;">
+        <div id="chatHeader">
+            <span>Чат с ассистентом</span>
+            <button id="closeChat">✖</button>
+        </div>
+        <div id="chatMessages"></div>
+        <form id="chatForm">
+            <input type="text" id="message" name="message" placeholder="Введите сообщение...">
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

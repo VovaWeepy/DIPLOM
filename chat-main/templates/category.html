@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>{{ category }}</h1>
+    <button onclick="window.location.href='/'">Назад</button>
+    <div id="productList">
+        {% if products %}
+            <ul>
+                {% for product in products %}
+                    <li>{{ product.name }} - {{ product.price }} руб. - {{ product.description }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Товары в категории {{ category }} не найдены.</p>
+        {% endif %}
+    </div>
+
+    <!-- Иконка чата -->
+    <div id="chatIcon">
+        <img src="/static/chat-icon.png" alt="Чат с ассистентом" title="Открыть чат">
+    </div>
+
+    <!-- Окно чата -->
+    <div id="chatWindow" style="display: none;">
+        <div id="chatHeader">
+            <span>Чат с ассистентом</span>
+            <button id="closeChat">✖</button>
+        </div>
+        <div id="chatMessages"></div>
+        <form id="chatForm">
+            <input type="text" id="message" name="message" placeholder="Введите сообщение...">
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

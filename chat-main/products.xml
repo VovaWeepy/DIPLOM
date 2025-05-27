@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <!-- Категория: Смартфоны -->
+    <product>
+        <id>1</id>
+        <name>Смартфон Galaxy Z</name>
+        <category>Смартфоны</category>
+        <price>79990.00</price>
+        <description>Смартфон с гибким экраном и 128 ГБ памяти.</description>
+    </product>
+    <product>
+        <id>2</id>
+        <name>Смартфон ProMax 14</name>
+        <category>Смартфоны</category>
+        <price>89990.00</price>
+        <description>Флагманский смартфон с камерой 48 МП.</description>
+    </product>
+    <product>
+        <id>3</id>
+        <name>Смартфон Lite 5G</name>
+        <category>Смартфоны</category>
+        <price>29990.00</price>
+        <description>Бюджетный смартфон с поддержкой 5G.</description>
+    </product>
+    <product>
+        <id>4</id>
+        <name>Смартфон Ultra S</name>
+        <category>Смартфоны</category>
+        <price>64990.00</price>
+        <description>Смартфон с экраном AMOLED и 256 ГБ памяти.</description>
+    </product>
+    <product>
+        <id>5</id>
+        <name>Смартфон Note X</name>
+        <category>Смартфоны</category>
+        <price>54990.00</price>
+        <description>Смартфон с большим экраном и стилусом.</description>
+    </product>
+    <product>
+        <id>6</id>
+        <name>Смартфон EcoPlus</name>
+        <category>Смартфоны</category>
+        <price>19990.00</price>
+        <description>Экономичный смартфон с батареей 5000 мАч.</description>
+    </product>
+    <product>
+        <id>7</id>
+        <name>Смартфон Vision Pro</name>
+        <category>Смартфоны</category>
+        <price>99990.00</price>
+        <description>Премиальный смартфон с камерой 108 МП.</description>
+    </product>
+    <product>
+        <id>8</id>
+        <name>Смартфон Compact 12</name>
+        <category>Смартфоны</category>
+        <price>39990.00</price>
+        <description>Компактный смартфон с экраном 5,8 дюйма.</description>
+    </product>
+    <product>
+        <id>9</id>
+        <name>Смартфон GameMaster</name>
+        <category>Смартфоны</category>
+        <price>74990.00</price>
+        <description>Игровой смартфон с процессором Snapdragon 8.</description>
+    </product>
+    <product>
+        <id>10</id>
+        <name>Смартфон Budget Y</name>
+        <category>Смартфоны</category>
+        <price>14990.00</price>
+        <description>Простой смартфон для базовых задач.</description>
+    </product>
+
+    <!-- Категория: Ноутбуки -->
+    <product>
+        <id>11</id>
+        <name>Ноутбук ProBook 15</name>
+        <category>Ноутбуки</category>
+        <price>64990.00</price>
+        <description>Мощный ноутбук с процессором i7 и 16 ГБ ОЗУ.</description>
+    </product>
+    <product>
+        <id>12</id>
+        <name>Ноутбук UltraSlim</name>
+        <category>Ноутбуки</category>
+        <price>89990.00</price>
+        <description>Ультратонкий ноутбук с экраном 14 дюймов.</description>
+    </product>
+    <product>
+        <id>13</id>
+        <name>Ноутбук GameForce</name>
+        <category>Ноутбуки</category>
+        <price>129990.00</price>
+        <description>Игровой ноутбук с видеокартой RTX 3060.</description>
+    </product>
+    <product>
+        <id>14</id>
+        <name>Ноутбук WorkLite</name>
+        <category>Ноутбуки</category>
+        <price>44990.00</price>
+        <description>Ноутбук для работы с процессором i5.</description>
+    </product>
+    <product>
+        <id>15</id>
+        <name>Ноутбук Creator X</name>
+        <category>Ноутбуки</category>
+        <price>99990.00</price>
+        <description>Ноутбук для дизайнеров с экраном 4K.</description>
+    </product>
+    <product>
+        <id>16</id>
+        <name>Ноутбук Budget 13</name>
+        <category>Ноутбуки</category>
+        <price>34990.00</price>
+        <description>Бюджетный ноутбук для учебы.</description>
+    </product>
+    <product>
+        <id>17</id>
+        <name>Ноутбук ProAir</name>
+        <category>Ноутбуки</category>
+        <price>79990.00</price>
+        <description>Легкий ноутбук с батареей на 12 часов.</description>
+    </product>
+    <product>
+        <id>18</id>
+        <name>Ноутбук Studio 16</name>
+        <category>Ноутбуки</category>
+        <price>109990.00</price>
+        <description>Ноутбук для видеомонтажа с 32 ГБ ОЗУ.</description>
+    </product>
+    <product>
+        <id>19</id>
+        <name>Ноутбук OfficeMate</name>
+        <category>Ноутбуки</category>
+        <price>49990.00</price>
+        <description>Ноутбук для офиса с SSD 512 ГБ.</description>
+    </product>
+    <product>
+        <id>20</id>
+        <name>Ноутбук TravelPro</name>
+        <category>Ноутбуки</category>
+        <price>69990.00</price>
+        <description>Компактный ноутбук для путешествий.</description>
+    </product>
+
+    <!-- Категория: Телевизоры -->
+    <product>
+        <id>21</id>
+        <name>Телевизор 4K Ultra</name>
+        <category>Телевизоры</category>
+        <price>54990.00</price>
+        <description>55-дюймовый телевизор с разрешением 4K.</description>
+    </product>
+    <product>
+        <id>22</id>
+        <name>Телевизор Smart LED</name>
+        <category>Телевизоры</category>
+        <price>39990.00</price>
+        <description>43-дюймовый смарт-телевизор с Wi-Fi.</description>
+    </product>
+    <product>
+        <id>23</id>
+        <name>Телевизор OLED Pro</name>
+        <category>Телевизоры</category>
+        <price>149990.00</price>
+        <description>65-дюймовый телевизор с OLED-матрицей.</description>
+    </product>
+    <product>
+        <id>24</id>
+        <name>Телевизор Mini LED</name>
+        <category>Телевизоры</category>
+        <price>79990.00</price>
+        <description>50-дюймовый телевизор с Mini LED подсветкой.</description>
+    </product>
+    <product>
+        <id>25</id>
+        <name>Телевизор Budget 32</name>
+        <category>Телевизоры</category>
+        <price>19990.00</price>
+        <description>32-дюймовый телевизор с разрешением Full HD.</description>
+    </product>
+    <product>
+        <id>26</id>
+        <name>Телевизор Cinema QLED</name>
+        <category>Телевизоры</category>
+        <price>99990.00</price>
+        <description>75-дюймовый телевизор с QLED-матрицей.</description>
+    </product>
+    <product>
+        <id>27</id>
+        <name>Телевизор Smart 55</name>
+        <category>Телевизоры</category>
+        <price>64990.00</price>
+        <description>55-дюймовый смарт-телевизор с 4K.</description>
+    </product>
+    <product>
+        <id>28</id>
+        <name>Телевизор UltraSlim</name>
+        <category>Телевизоры</category>
+        <price>49990.00</price>
+        <description>48-дюймовый телевизор с тонким корпусом.</description>
+    </product>
+    <product>
+        <id>29</id>
+        <name>Телевизор Vision 8K</name>
+        <category>Телевизоры</category>
+        <price>199990.00</price>
+        <description>85-дюймовый телевизор с разрешением 8K.</description>
+    </product>
+    <product>
+        <id>30</id>
+        <name>Телевизор Compact 40</name>
+        <category>Телевизоры</category>
+        <price>29990.00</price>
+        <description>40-дюймовый телевизор для небольших комнат.</description>
+    </product>
+
+    <!-- Категория: Наушники -->
+    <product>
+        <id>31</id>
+        <name>Наушники TrueSound</name>
+        <category>Наушники</category>
+        <price>3990.00</price>
+        <description>Беспроводные наушники с шумоподавлением.</description>
+    </product>
+    <product>
+        <id>32</id>
+        <name>Наушники BassPro</name>
+        <category>Наушники</category>
+        <price>5990.00</price>
+        <description>Наушники с усиленным басом и 20 часами работы.</description>
+    </product>
+    <product>
+        <id>33</id>
+        <name>Наушники SportFit</name>
+        <category>Наушники</category>
+        <price>2990.00</price>
+        <description>Спортивные наушники с защитой от влаги.</description>
+    </product>
+    <product>
+        <id>34</id>
+        <name>Наушники StudioMix</name>
+        <category>Наушники</category>
+        <price>7990.00</price>
+        <description>Студийные наушники для записи звука.</description>
+    </product>
+    <product>
+        <id>35</id>
+        <name>Наушники AirLite</name>
+        <category>Наушники</category>
+        <price>4990.00</price>
+        <description>Легкие беспроводные наушники с микрофоном.</description>
+    </product>
+    <product>
+        <id>36</id>
+        <name>Наушники NoiseCancel</name>
+        <category>Наушники</category>
+        <price>9990.00</price>
+        <description>Наушники с активным шумоподавлением.</description>
+    </product>
+    <product>
+        <id>37</id>
+        <name>Наушники GameSound</name>
+        <category>Наушники</category>
+        <price>6990.00</price>
+        <description>Игровые наушники с 7.1 звуком.</description>
+    </product>
+    <product>
+        <id>38</id>
+        <name>Наушники MiniBuds</name>
+        <category>Наушники</category>
+        <price>2490.00</price>
+        <description>Компактные внутриканальные наушники.</description>
+    </product>
+    <product>
+        <id>39</id>
+        <name>Наушники ProAudio</name>
+        <category>Наушники</category>
+        <price>11990.00</price>
+        <description>Профессиональные наушники для аудиофилов.</description>
+    </product>
+    <product>
+        <id>40</id>
+        <name>Наушники TravelEar</name>
+        <category>Наушники</category>
+        <price>3490.00</price>
+        <description>Наушники для путешествий с чехлом.</description>
+    </product>
+
+    <!-- Категория: Планшеты -->
+    <product>
+        <id>41</id>
+        <name>Планшет TabLite</name>
+        <category>Планшеты</category>
+        <price>19990.00</price>
+        <description>10-дюймовый планшет с 64 ГБ памяти.</description>
+    </product>
+    <product>
+        <id>42</id>
+        <name>Планшет ProTab 12</name>
+        <category>Планшеты</category>
+        <price>39990.00</price>
+        <description>12-дюймовый планшет с 128 ГБ и стилусом.</description>
+    </product>
+    <product>
+        <id>43</id>
+        <name>Планшет MiniTab</name>
+        <category>Планшеты</category>
+        <price>14990.00</price>
+        <description>8-дюймовый планшет для чтения и работы.</description>
+    </product>
+    <product>
+        <id>44</id>
+        <name>Планшет UltraPad</name>
+        <category>Планшеты</category>
+        <price>49990.00</price>
+        <description>11-дюймовый планшет с AMOLED-экраном.</description>
+    </product>
+    <product>
+        <id>45</id>
+        <name>Планшет KidsPlay</name>
+        <category>Планшеты</category>
+        <price>12990.00</price>
+        <description>Детский планшет с родительским контролем.</description>
+    </product>
+    <product>
+        <id>46</id>
+        <name>Планшет WorkPad</name>
+        <category>Планшеты</category>
+        <price>29990.00</price>
+        <description>Планшет для работы с клавиатурой в комплекте.</description>
+    </product>
+    <product>
+        <id>47</id>
+        <name>Планшет ArtStudio</name>
+        <category>Планшеты</category>
+        <price>59990.00</price>
+        <description>Планшет для художников с поддержкой стилуса.</description>
+    </product>
+    <product>
+        <id>48</id>
+        <name>Планшет BudgetTab</name>
+        <category>Планшеты</category>
+        <price>9990.00</price>
+        <description>Бюджетный планшет с 32 ГБ памяти.</description>
+    </product>
+    <product>
+        <id>49</id>
+        <name>Планшет GamePad</name>
+        <category>Планшеты</category>
+        <price>34990.00</price>
+        <description>Игровой планшет с мощным процессором.</description>
+    </product>
+    <product>
+        <id>50</id>
+        <name>Планшет MediaPro</name>
+        <category>Планшеты</category>
+        <price>24990.00</price>
+        <description>Планшет для просмотра фильмов и мультимедиа.</description>
+    </product>
+</products>
