@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовый магазин электроники</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .product-card {
+            height: 100%;
+            transition: transform 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1001;
+        }
+        .chat-toggle:hover {
+            background-color: #0056b3;
+        }
+        #chat-container {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 70px;
+        }
+        .chat-visible #chat-container {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">ТехноМаркет</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Товары</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">О нас</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный баннер -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="p-5 mb-4 bg-light rounded-3">
+                    <div class="container-fluid py-5">
+                        <h1 class="display-5 fw-bold">Добро пожаловать в ТехноМаркет</h1>
+                        <p class="col-md-8 fs-4">Лучшие цены на электронику и техническую поддержку 24/7</p>
+                        <button class="btn btn-primary btn-lg" type="button">Узнать больше</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Секция товаров -->
+    <div class="container my-5" id="products">
+        <h2 class="text-center mb-4">Наши товары</h2>
+        <div class="row g-4">
+            <!-- Товар 1 -->
+            <div class="col-md-4">
+                <div class="card product-card">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Смартфон">
+                    <div class="card-body">
+                        <h5 class="card-title">Смартфон Pro X</h5>
+                        <p class="card-text">Мощный процессор, 8GB RAM, 128GB память</p>
+                        <p class="card-text"><strong>Цена: 49,999 ₽</strong></p>
+                        <button class="btn btn-primary">Купить</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Товар 2 -->
+            <div class="col-md-4">
+                <div class="card product-card">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Ноутбук">
+                    <div class="card-body">
+                        <h5 class="card-title">Ноутбук Ultra</h5>
+                        <p class="card-text">15.6", Intel i7, 16GB RAM, 512GB SSD</p>
+                        <p class="card-text"><strong>Цена: 89,999 ₽</strong></p>
+                        <button class="btn btn-primary">Купить</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Товар 3 -->
+            <div class="col-md-4">
+                <div class="card product-card">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Планшет">
+                    <div class="card-body">
+                        <h5 class="card-title">Планшет Air</h5>
+                        <p class="card-text">10.9", 64GB, Wi-Fi + Cellular</p>
+                        <p class="card-text"><strong>Цена: 39,999 ₽</strong></p>
+                        <button class="btn btn-primary">Купить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- О нас -->
+    <div class="container my-5" id="about">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mb-4">О нас</h2>
+                <p class="text-center">
+                    ТехноМаркет - ваш надежный партнер в мире электроники. Мы предлагаем широкий ассортимент 
+                    качественной техники от ведущих производителей по конкурентным ценам.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Чат-виджет -->
+    <div class="chat-widget">
+        <div class="chat-toggle" onclick="toggleChat()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+                <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"/>
+            </svg>
+        </div>
+        <!-- Здесь будет встроен чат-бот -->
+
+
+
+
+
+
+
+
+    <div id="chat-container"></div>
+    <script>
+        (function() {
+            var container = document.getElementById('chat-container');
+            var iframe = document.createElement('iframe');
+            iframe.src = 'http://127.0.0.1:5001/chat-frame';
+            iframe.style.width = '300px';
+            iframe.style.height = '500px';
+            iframe.style.border = 'none';
+            container.appendChild(iframe);
+        })();
+    </script>
+
+
+
+
+
+
+
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>ТехноМаркет</h5>
+                    <p>Качественная электроника для всех</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>© 2024 ТехноМаркет. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleChat() {
+            document.querySelector('.chat-widget').classList.toggle('chat-visible');
+        }
+    </script>
+</body>
+</html> 

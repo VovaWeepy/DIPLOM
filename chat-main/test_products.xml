@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product>
+        <id>1</id>
+        <name>Смартфон Galaxy S21</name>
+        <category>Смартфоны</category>
+        <price>49999</price>
+        <description>Флагманский смартфон Samsung с 6.2" экраном, 8ГБ RAM, 128ГБ памяти</description>
+    </product>
+    <product>
+        <id>2</id>
+        <name>Ноутбук ThinkPad X1</name>
+        <category>Ноутбуки</category>
+        <price>89999</price>
+        <description>Профессиональный ноутбук с Intel Core i7, 16ГБ RAM, 512ГБ SSD</description>
+    </product>
+    <product>
+        <id>3</id>
+        <name>Наушники Sony WH-1000XM4</name>
+        <category>Аудио</category>
+        <price>29999</price>
+        <description>Беспроводные наушники с шумоподавлением и HD звуком</description>
+    </product>
+</products> 

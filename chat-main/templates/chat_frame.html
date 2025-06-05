@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        #chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+        .user-message {
+            background: #007bff;
+            color: white;
+            margin-left: auto;
+        }
+        .bot-message {
+            background: #e9ecef;
+            color: #212529;
+        }
+        .error-message {
+            background: #dc3545;
+            color: white;
+            text-align: center;
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .typing-indicator {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #e9ecef;
+            border-radius: 15px;
+        }
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 3px;
+            background: #6c757d;
+            border-radius: 50%;
+            animation: wave 1.3s linear infinite;
+        }
+        .dot:nth-child(2) { animation-delay: -1.1s; }
+        .dot:nth-child(3) { animation-delay: -0.9s; }
+        
+        @keyframes wave {
+            0%, 60%, 100% { transform: initial; }
+            30% { transform: translateY(-5px); }
+        }
+        .auth-error {
+            text-align: center;
+            padding: 20px;
+        }
+        .auth-error .btn {
+            margin-top: 10px;
+        }
+        #chat-form {
+            display: none;
+        }
+        #chat-form.visible {
+            display: flex !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-messages"></div>
+    <div id="loading">
+        <div class="typing-indicator">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+    <form id="chat-form" class="gap-2">
+        <input type="text" id="message-input" class="form-control" placeholder="Введите сообщение..." required>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const chatForm = document.getElementById('chat-form');
+        const messageInput = document.getElementById('message-input');
+        const loading = document.getElementById('loading');
+
+        // Функция для проверки авторизации
+        async function checkAuth() {
+            try {
+                const response = await fetch('/check_auth', {
+                    credentials: 'include' // Важно для работы с сессией
+                });
+                const data = await response.json();
+                
+                if (!response.ok || !data.authenticated) {
+                    showAuthError(data.redirect_url);
+                    chatForm.classList.remove('visible');
+                    return false;
+                }
+                
+                chatForm.classList.add('visible');
+                return true;
+            } catch (error) {
+                console.error('Ошибка при проверке авторизации:', error);
+                showAuthError();
+                chatForm.classList.remove('visible');
+                return false;
+            }
+        }
+
+        function showAuthError(redirectUrl = null) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'auth-error';
+            errorDiv.innerHTML = `
+                <div class="alert alert-danger">
+                    Не авторизован. Требуется авторизация
+                </div>
+                <button class="btn btn-primary" onclick="checkAuthAgain()">
+                    Проверить снова
+                </button>
+            `;
+            if (redirectUrl) {
+                errorDiv.innerHTML += `
+                    <button class="btn btn-secondary ms-2" onclick="window.top.location.href='${redirectUrl}'">
+                        Войти
+                    </button>
+                `;
+            }
+            chatMessages.innerHTML = '';
+            chatMessages.appendChild(errorDiv);
+        }
+
+        async function checkAuthAgain() {
+            const isAuthenticated = await checkAuth();
+            if (isAuthenticated) {
+                chatMessages.innerHTML = '';
+                addMessage('Здравствуйте! Я помощник магазина электроники. Чем могу помочь?');
+                await checkDataStatus();
+            }
+        }
+
+        // Функция для проверки статуса данных
+        async function checkDataStatus() {
+            try {
+                const response = await fetch('/get_settings', {
+                    credentials: 'include' // Важно для работы с сессией
+                });
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    const errorMessage = data.error || 'Ошибка получения настроек';
+                    const details = data.details ? `\n${data.details}` : '';
+                    showError(`${errorMessage}${details}`);
+                    return false;
+                }
+
+                if (!data.success || !data.settings) {
+                    showError('Ошибка получения настроек. Пожалуйста, обновите страницу.');
+                    return false;
+                }
+
+                if (!data.settings.has_products) {
+                    if (!data.settings.xml_url) {
+                        showError('Пожалуйста, укажите путь к XML файлу в настройках панели управления');
+                    } else {
+                        showError('Не удалось загрузить товары. Проверьте XML файл в настройках панели управления');
+                    }
+                    return false;
+                }
+
+                if (data.settings.products_count === 0) {
+                    showError('В базе нет товаров. Проверьте содержимое XML файла');
+                    return false;
+                }
+
+                // Убираем предыдущие сообщения об ошибках, если все в порядке
+                const errorMessages = chatMessages.getElementsByClassName('error-message');
+                while (errorMessages.length > 0) {
+                    errorMessages[0].remove();
+                }
+
+                return true;
+            } catch (error) {
+                console.error('Ошибка при проверке данных:', error);
+                showError('Ошибка при проверке данных. Пожалуйста, обновите страницу.');
+                return false;
+            }
+        }
+
+        function showError(message) {
+            // Удаляем предыдущие сообщения об ошибках
+            const errorMessages = chatMessages.getElementsByClassName('error-message');
+            while (errorMessages.length > 0) {
+                errorMessages[0].remove();
+            }
+
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            
+            // Добавляем кнопку для обновления данных
+            const refreshButton = document.createElement('button');
+            refreshButton.className = 'btn btn-light btn-sm mt-2';
+            refreshButton.textContent = 'Проверить снова';
+            refreshButton.onclick = async () => {
+                errorDiv.textContent = 'Проверка данных...';
+                await checkDataStatus();
+            };
+            
+            errorDiv.appendChild(document.createElement('br'));
+            errorDiv.appendChild(refreshButton);
+            
+            chatMessages.appendChild(errorDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Отправляем уведомление о новом сообщении родительскому окну
+            if (!isUser) {
+                try {
+                    window.parent.postMessage({ type: 'newMessage' }, '*');
+                } catch (e) {
+                    console.error('Ошибка отправки уведомления:', e);
+                }
+            }
+        }
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Проверяем авторизацию перед отправкой сообщения
+            const isAuthenticated = await checkAuth();
+            if (!isAuthenticated) return;
+
+            // Проверяем наличие данных перед отправкой сообщения
+            const hasData = await checkDataStatus();
+            if (!hasData) {
+                messageInput.value = '';
+                return;
+            }
+
+            // Добавляем сообщение пользователя
+            addMessage(message, true);
+            messageInput.value = '';
+            messageInput.disabled = true;
+
+            // Показываем индикатор загрузки
+            loading.style.display = 'block';
+
+            try {
+                const response = await fetch('/process_chat', {
+                    method: 'POST',
+                    credentials: 'include', // Важно для работы с сессией
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `message=${encodeURIComponent(message)}`
+                });
+
+                const data = await response.json();
+                
+                if (response.ok && data.response) {
+                    addMessage(data.response);
+                } else {
+                    showError(data.error || 'Произошла ошибка при обработке сообщения');
+                }
+            } catch (error) {
+                showError('Произошла ошибка при отправке сообщения');
+            } finally {
+                loading.style.display = 'none';
+                messageInput.disabled = false;
+                messageInput.focus();
+            }
+        });
+
+        // Проверяем авторизацию при загрузке страницы
+        (async () => {
+            const isAuthenticated = await checkAuth();
+            if (isAuthenticated) {
+                addMessage('Здравствуйте! Я помощник магазина электроники. Чем могу помочь?');
+                await checkDataStatus();
+            }
+        })();
+    </script>
+</body>
+</html> 
